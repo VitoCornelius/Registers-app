@@ -23,4 +23,7 @@ public class Register {
     private String name;
     private BigDecimal balance = BigDecimal.ZERO;
 
+    public void increaseBalance(BigDecimal amount) {
+        this.balance = this.balance.add(amount);
+    }
 }
