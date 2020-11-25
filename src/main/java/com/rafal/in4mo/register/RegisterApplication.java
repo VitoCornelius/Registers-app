@@ -21,10 +21,10 @@ public class RegisterApplication {
 
 	@PostConstruct
 	public void run(){
-		registerRepository.save(new Register(1, "Wallet", new BigDecimal(1000)));
-		registerRepository.save(new Register(2, "Savings", new BigDecimal(5000)));
-		registerRepository.save(new Register(3, "Insurance Policy", new BigDecimal(0)));
-		registerRepository.save(new Register(4, "Food Expenses", new BigDecimal(0)));
+		if (registerRepository.findById(1).isEmpty()) registerRepository.save(new Register(1, "Wallet", new BigDecimal(1000)));
+		if (registerRepository.findById(2).isEmpty()) registerRepository.save(new Register(2, "Savings", new BigDecimal(5000)));
+		if (registerRepository.findById(3).isEmpty()) registerRepository.save(new Register(3, "Insurance Policy", new BigDecimal(0)));
+		if (registerRepository.findById(4).isEmpty()) registerRepository.save(new Register(4, "Food Expenses", new BigDecimal(0)));
 	}
 
 }
