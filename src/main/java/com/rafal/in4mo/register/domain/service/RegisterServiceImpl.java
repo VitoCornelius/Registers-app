@@ -1,5 +1,6 @@
 package com.rafal.in4mo.register.domain.service;
 
+import com.rafal.in4mo.register.domain.dto.RegistersSummary;
 import com.rafal.in4mo.register.domain.dto.Transfer;
 import com.rafal.in4mo.register.domain.model.Register;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class RegisterServiceImpl implements RegisterService {
     }
 
     @Override
-    public List<Register> getAll() {
+    public List<RegistersSummary> getAll() {
         return null;
     }
 }

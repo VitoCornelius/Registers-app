@@ -1,5 +1,6 @@
 package com.rafal.in4mo.register.domain.service;
 
+import com.rafal.in4mo.register.domain.dto.RegistersSummary;
 import com.rafal.in4mo.register.domain.dto.Transfer;
 import com.rafal.in4mo.register.domain.model.Register;
 
@@ -9,5 +10,5 @@ import java.util.List;
 public interface RegisterService {
     void rechargeRegister(int registerId, BigDecimal amount);
     void transferBetweenRegisters(Transfer transfer);
-    List<Register> getAll();
+    List<RegistersSummary> getAll();
 }
