@@ -70,7 +70,7 @@ class RegisterServiceImplTest {
     @Test
     public void shouldFailWhenTransferWithNotEnoughMoney() {
         Assertions.assertThrows(NotEnoughMoneyException.class, () -> {
-            registerService.transferBetweenRegisters(new Transfer(1, 1, new BigDecimal(10000)));
+            registerService.transferBetweenRegisters(new Transfer(1, 2, new BigDecimal(10000)));
         });
         assertThat(registerRepository.findById(1).get().getBalance()).isEqualTo(new BigDecimal(1000));
         assertThat(registerRepository.findById(2).get().getBalance()).isEqualTo(new BigDecimal(200));
