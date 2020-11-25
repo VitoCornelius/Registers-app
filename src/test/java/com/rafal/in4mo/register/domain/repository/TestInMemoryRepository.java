@@ -1,7 +1,6 @@
 package com.rafal.in4mo.register.domain.repository;
 
 import com.rafal.in4mo.register.domain.model.Register;
-import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;

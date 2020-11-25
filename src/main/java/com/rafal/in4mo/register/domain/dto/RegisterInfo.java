@@ -15,12 +15,12 @@ public class RegisterInfo {
     private int id;
     private String amount;
 
-    public static RegisterInfo mapToRegisterInfo(String name, BigDecimal bd, int id) {
+    public static RegisterInfo mapToRegisterInfo(String registerName, BigDecimal amount, int registerId) {
         DecimalFormat df = new DecimalFormat();
         df.setMaximumFractionDigits(2);
         df.setMinimumFractionDigits(0);
         df.setGroupingUsed(false);
-        String result = df.format(bd);
-        return new RegisterInfo(name, id, result);
+        String result = df.format(amount);
+        return new RegisterInfo(registerName, registerId, result);
     }
 }

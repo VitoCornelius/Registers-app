@@ -23,7 +23,16 @@ public class Register {
     private String name;
     private BigDecimal balance = BigDecimal.ZERO;
 
+    //private List<RegisterEvent> registerEventList = new ArrayList<>(); //TODO
+
     public void increaseBalance(BigDecimal amount) {
+        //TODO add an domain event handling mechanism to hold the history of operations :)
         this.balance = this.balance.add(amount);
     }
+
+    public void substractbalance(BigDecimal amount) {
+        //TODO add an domain event handling mechanism to hold the history of operations :)
+        this.balance = this.balance.subtract(amount);
+    }
+
 }

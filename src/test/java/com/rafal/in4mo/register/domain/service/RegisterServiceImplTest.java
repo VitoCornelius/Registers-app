@@ -1,6 +1,8 @@
 package com.rafal.in4mo.register.domain.service;
 
 import com.rafal.in4mo.register.domain.dto.RegisterInfo;
+import com.rafal.in4mo.register.domain.dto.Transfer;
+import com.rafal.in4mo.register.domain.exception.NotEnoughMoneyException;
 import com.rafal.in4mo.register.domain.exception.RegistryNotFoundException;
 import com.rafal.in4mo.register.domain.model.Register;
 import com.rafal.in4mo.register.domain.repository.RegisterRepository;
@@ -44,6 +46,31 @@ class RegisterServiceImplTest {
     public void shouldFailWhenRechargeWithWrongAccountNumber() {
         Assertions.assertThrows(RegistryNotFoundException.class,  () -> {
             registerService.rechargeRegister(15, new BigDecimal(500));
+        });
+        assertThat(registerRepository.findById(1).get().getBalance()).isEqualTo(new BigDecimal(1000));
+        assertThat(registerRepository.findById(2).get().getBalance()).isEqualTo(new BigDecimal(200));
+    }
+
+    @Test
+    public void shouldTransferMoney() throws RegistryNotFoundException, NotEnoughMoneyException {
+        registerService.transferBetweenRegisters(new Transfer(1, 2, new BigDecimal(1000)));
+        assertThat(registerRepository.findById(1).get().getBalance()).isEqualTo(BigDecimal.ZERO);
+        assertThat(registerRepository.findById(2).get().getBalance()).isEqualTo(new BigDecimal(1200));
+    }
+
+    @Test
+    public void shouldFailWhenTransferWithWrongAccountNumber() {
+        Assertions.assertThrows(RegistryNotFoundException.class, () -> {
+            registerService.transferBetweenRegisters(new Transfer(1, 55, new BigDecimal(10)));
+        });
+        assertThat(registerRepository.findById(1).get().getBalance()).isEqualTo(new BigDecimal(1000));
+        assertThat(registerRepository.findById(2).get().getBalance()).isEqualTo(new BigDecimal(200));
+    }
+
+    @Test
+    public void shouldFailWhenTransferWithNotEnoughMoney() {
+        Assertions.assertThrows(NotEnoughMoneyException.class, () -> {
+            registerService.transferBetweenRegisters(new Transfer(1, 1, new BigDecimal(10000)));
         });
         assertThat(registerRepository.findById(1).get().getBalance()).isEqualTo(new BigDecimal(1000));
         assertThat(registerRepository.findById(2).get().getBalance()).isEqualTo(new BigDecimal(200));
