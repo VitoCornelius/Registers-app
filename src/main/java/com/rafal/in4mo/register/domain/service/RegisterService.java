@@ -10,5 +10,5 @@ import java.util.List;
 public interface RegisterService {
     void rechargeRegister(int registerId, BigDecimal amount);
     void transferBetweenRegisters(Transfer transfer);
-    List<RegistersSummary> getAll();
+    RegistersSummary getAll();
 }

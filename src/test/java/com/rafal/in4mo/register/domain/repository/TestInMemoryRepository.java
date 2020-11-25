@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class TestInMemoryRepository implements RegisterRepository {
 
@@ -16,12 +17,13 @@ public class TestInMemoryRepository implements RegisterRepository {
     }
 
     @Override
-    public Register findById(int id) {
-        return registers.stream().filter(register -> register.getId() == id).findFirst().orElse(null);
+    public Optional<Register> findById(int id) {
+        return registers.stream().filter(register -> register.getId() == id).findFirst();
     }
 
     @Override
-    public void save(Register register) {
+    public Register save(Register register) {
         registers.add(register);
+        return register;
     }
 }
